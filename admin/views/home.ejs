@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/lib/boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/userList.css">
+    <script type="text/javascript" src="/lib/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/lib/boostrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <%- include("header/head.ejs") %>
+    <%- include('userList.ejs')  %>
+
+    <script>
+        let home = document.getElementById('home')
+        home.setAttribute('class', 'active')
+    </script>
+    
+</body>
+
+</html>

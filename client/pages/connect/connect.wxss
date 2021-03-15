@@ -1,0 +1,121 @@
+/* pages/connect/connect.wxss */
+
+page {
+    padding-bottom: 90rpx;
+}
+
+.concat {
+    position: relative;
+}
+
+.msg_box {
+    height: auto;
+}
+
+.msg {
+    width: fit-content;
+    background-color: rgb(132, 216, 121);
+    position: relative;
+    padding: 5px;
+    word-break: break-all;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 250px;
+}
+
+.user_msg {
+    margin-right: 50px;
+}
+
+.server_msg {
+    margin-left: 50px;
+}
+
+.user_msg::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-color: skyblue;
+    position: absolute;
+    right: -50px;
+    top: 0;
+    border-radius: 50%;
+}
+
+.user_msg::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: -15px;
+    box-sizing: border-box;
+    border: 10px solid transparent;
+    border-left: 10px solid rgb(132, 216, 121);
+    border-radius: 50%;
+}
+
+.server_msg::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-color: skyblue;
+    position: absolute;
+    left: -50px;
+    top: 0;
+    border-radius: 50%;
+}
+
+.server_msg::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: -15px;
+    box-sizing: border-box;
+    border: 10px solid transparent;
+    border-right: 10px solid rgb(132, 216, 121);
+    border-radius: 50%;
+}
+
+/* 输入框 */
+
+.input_box {
+    display: flex;
+    position: fixed;
+    bottom: 0rpx;
+    width: 100%;
+    height: 80rpx;
+    border-top: 1px solid #ccc;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.user_inp {
+    flex: 6;
+    height: 80rpx;
+    border-bottom: 1px solid #ccc;
+    padding-left: 10rpx;
+}
+
+.icon-emoji {
+    flex: 1;
+    font-size: 60rpx;
+}
+
+.icon-add {
+    flex: 1;
+    font-size: 60rpx;
+    font-weight: bold;
+}
+
+.send {
+    flex: 1;
+    height: 80rpx;
+    font-size: 34rpx;
+    box-sizing: border-box;
+    border: none;
+    margin-left: 10px;
+    background: rgb(132, 216, 121);
+}

@@ -1,0 +1,5 @@
+<!--pages/setting/setting.wxml-->
+<view class="setting_box">
+    <view class="username_set">更改用户名</view>
+    <view class="password_set">更改密码</view>
+</view>

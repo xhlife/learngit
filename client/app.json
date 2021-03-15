@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/connect/connect",
+    "pages/my/my",
+    "pages/showData/showData",
+    "pages/setting/setting"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#90d3ee",
+    "navigationBarTitleText": "农业智能控制系统",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "icon/home.png",
+        "selectedIconPath": "icon/home-o.png"
+      },
+      {
+        "pagePath": "pages/connect/connect",
+        "text": "咨询",
+        "iconPath": "icon/concat.png",
+        "selectedIconPath": "icon/concat-o.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "icon/my.png",
+        "selectedIconPath": "icon/my-o.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

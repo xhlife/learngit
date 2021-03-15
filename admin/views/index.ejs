@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/lib/boostrap/css/bootstrap.min.css" media="screen">
+    <style type="text/css">
+      .m15 {
+        margin: 15px;
+      }
+    
+      .tc {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .pwd{
+        margin-top: 20px;
+      }
+      .btn{
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body screen_capture_injected="true">
+    <div class="container">
+
+      
+      <form class="col-offset-4 col-sm-4 form-horizontal" role="form" method="post" onsubmit="return false">
+        <fieldset>
+          <legend></legend>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <p class="tc">管理员登录</p>
+            </div>
+
+            <div class="panel-body m15">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-user"></span>
+                </span>
+                <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" required>
+              </div>
+
+              <div class="input-group pwd">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-lock"></span>
+                </span>
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输密码" required>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" id="login0">登录</button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <script type="text/javascript" src="/lib/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/lib/boostrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/lib/md5.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script type="text/javascript">
+      $(function () {
+        /* $("#register0").click(function () {
+          location.href = 'register';
+        }); */
+        $("#login0").click(function () {
+          var username = $("#username").val();
+          var password = $.md5($("#password").val());
+          var data = { "username": username, "password": password };
+          if (!username ) {
+            return
+          }
+          if (!password) {
+            return
+          }
+          $.ajax({
+            url: '/superUser/signin',
+            type: 'post',
+            data: data,
+            success: function (data, status) {
+              location.href = '/home';
+            },
+            error: function (data, status) {
+              if (status == 'error') {
+                location.href = '/';           
+              }
+            }
+          });
+        });
+      });
+    </script>
+
+  </body>
+</html>

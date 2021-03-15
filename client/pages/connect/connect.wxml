@@ -1,0 +1,19 @@
+<!--pages/connect/connect.wxml-->
+<view class="concat">
+  <view class="msg_box" 
+  wx:for="{{Message.message}}" 
+  wx:key="index"
+  >
+    <!-- 用户信息 -->
+    <view class="msg user_msg" wx:if="{{item.belong == Message.userName ? true : false}}"><text>{{item.content}}</text></view>
+    <!-- 服务信息 -->
+    <view class="msg server_msg" wx:else><text>{{item.content}}</text></view>
+  </view>
+</view>
+<!-- 输入框 -->
+<view class="input_box">
+  <input bindinput="userInput" class="user_inp" type="text" value="{{input_msg}}"></input>
+  <view class="iconfont icon-emoji"></view>
+  <view wx:if="{{!show}}" class="iconfont icon-add"></view>
+  <button wx:else class="send" bindtap="handleSend">发送</button>
+</view>

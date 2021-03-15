@@ -1,0 +1,200 @@
+<div>
+    <ul id="user_control">
+        <li class="addUser">添加用户</li>
+        <li class="findUser">查询用户</li>
+    </ul>
+</div>
+<h3 class="tb_head">用户表</h3>
+
+<table class="table table-striped">
+    <hr>
+    <thead>
+        <tr>
+            <th>用户名</th>
+            <th>邮箱</th>
+            <th>删除操作</th>
+        </tr>
+    </thead>
+    <tbody id="user_box">
+        <!--  <tr>
+            <td>Tanmay</td>
+            <td>Bangalore</td>
+            <td>560001</td>
+        </tr> -->
+    </tbody>
+</table>
+
+<div class="mask"></div>
+<!-- 添加用户模态框 -->
+<div class="panel panel-default addpanel">
+    <div class="panel-heading">添加用户</div>
+    <table class="table add_user">
+        <tr>
+            <td>用户名：</td>
+            <td> <input class="username" type="text"></td>
+        </tr>
+        <tr>
+            <td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+            <td> <input class="password" type="text"></td>
+        </tr>
+        <tr>
+            <td>电&nbsp;&nbsp;&nbsp;&nbsp;话：</td>
+            <td> <input class="telNo" type="text"></td>
+        </tr>
+        <tr>
+            <td>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：</td>
+            <td> <input class="email" type="text"></td>
+        </tr>
+        <tr>
+            <td><input class="cancelAdd" type="button" value="取消"></td>
+            <td> <input class="comfirmAdd" type="submit"></td>
+        </tr>
+    </table>
+</div>
+<!-- 删除用户模态框 -->
+<div class="panel panel-default deletepanel">
+    <div class="panel-heading">删除用户</div>
+    <table class="table delete_user">
+        <tr>
+            <td><input class="cancelDelete" type="button" value="取消"></td>
+            <td> <input class="comfirmDelete" type="button" value="确认"></td>
+        </tr>
+    </table>
+</div>
+<!-- 搜索模态框 -->
+<div class="panel panel-default findpanel">
+    <div class="panel-heading">搜索用户</div>
+    <table class="table find_user">
+        <tr>
+            <td>手机/邮箱</td>
+            <td> <input class="find" type="text" placeholder="输入手机或邮箱"></td>
+        </tr>
+        <tr>
+            <td><input class="cancelFind" type="button" value="取消"></td>
+            <td> <input class="comfirmFind" type="button" value="确认"></td>
+        </tr>
+    </table>
+</div>
+
+<script src="/lib/md5.js"></script>
+<script>
+    window.onload = function () {
+        // 获取用户列表
+        $.ajax({
+            url: '/userList',
+            type: 'post',
+            success: function (data, status) {
+                // console.log(data)
+                for (const key in data.userMap) {
+                    if (data.userMap.hasOwnProperty(key)) {
+                        // console.log(data.userMap[key].username);
+
+                        let tr = `<tr>
+                                    <td class='usernameInfo'>${data.userMap[key].username}</td>
+                                    <td>${data.userMap[key].email}</td>
+                                    <td>
+                                        <input type="submit" value="删除" class="del_user">
+                                    </td>
+                                </tr>`
+                        $('#user_box').append(tr)
+                    }
+                    
+                }
+                var nodeList = document.getElementsByClassName('del_user')
+                for (let index = 0; index < nodeList.length; index++) {
+                    nodeList[index].onclick = function(){
+                        $('.mask').css('display', 'block');
+                        $('.deletepanel').css('display', 'block');
+                    }
+                    
+                }
+            },
+            error: function (data, status) {
+
+            }
+        });
+
+        // 取消删除
+        $('.cancelDelete').on('click', function () {
+            $('.mask').css('display', 'none');
+            $('.deletepanel').css('display', 'none')
+        })
+
+        // 确认删除
+        $('.comfirmDelete').on('click', function () {
+            let username = $('.usernameInfo').get(0).innerText;
+            $.ajax({
+                url: '/users/deleteUser',
+                type: 'post',
+                data: { username },
+                success: function (data, status) {
+                    $('.deletepanel').css('display', 'none')
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+        })
+        // 添加用户操作
+        $('.addUser').on('click', function () {
+            $('.mask').css('display', 'block');
+            $('.addpanel').css('display', 'block')
+        })
+
+        // 取消添加按钮
+        $('.cancelAdd').on('click', function (e) {
+            $('.mask').css('display', 'none');
+            $('.addpanel').css('display', 'none')
+        })
+        // 确认添加按钮
+        $('.comfirmAdd').on('click', function () {
+            let username = $('.username').val();
+            let password = $.md5($(".password").val());
+            let telNo = $('.telNo').val();
+            let email = $('.email').val();
+            let pattEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+            let pattTel = /^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+            let resE = email.match(pattEmail)
+
+            if (!username && !password && !telNo && !email) {
+                alert('内容不能为空！')
+                return;
+            }
+            if (!resE) {
+                alert('邮箱格式错误！')
+                return
+            }
+            let resT = telNo.match(pattTel)
+            if (!resT) {
+                alert('电话格式错误！')
+                return
+            }
+            $.ajax({
+                url: '/users/addUser',
+                type: 'post',
+                data: { username, password, telNo, email },
+                success: function (data, status) {
+                    $('.mask').css('display', 'none');
+                    $('.addpanel').css('display', 'none')
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+        })
+        // 查询用户
+        $('.findUser').on('click', function () {
+            $('.mask').css('display', 'block');
+            $('.findpanel').css('display', 'block')
+        })
+        // 取消搜索
+        $('.cancelFind').on('click', function () {
+            $('.mask').css('display', 'none');
+            $('.findpanel').css('display', 'none')
+        })
+        // 确认搜素
+        $('.comfirmFind').on('click', function () {
+
+        })
+    }
+</script>

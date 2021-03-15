@@ -1,0 +1,206 @@
+/* pages/showData/showData.wxss */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.headtext {
+    text-align: center;
+    margin-bottom: 20rpx;
+}
+
+.textarea {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    height: 80rpx;
+}
+
+.textarea .text {
+    flex: 1;
+    font-size: 30rpx;
+    line-height: 80rpx;
+}
+
+.textarea .iconfont {
+    line-height: 68rpx;
+    font-size: 40rpx;
+    color: skyblue;
+}
+
+.canvas {
+    width: 100%;
+    height: 250px;
+    padding-top: 20rpx;
+}
+
+.text {
+    text-align: center;
+}
+
+.suitable {
+    color: springgreen;
+}
+
+/* 温度过高警告 */
+
+.t_warn_top::before {
+    content: '温度过高';
+    display: block;
+    width: 120rpx;
+    height: 46rpx;
+    background-color: rgb(241, 89, 68);
+    position: absolute;
+    top: -20rpx;
+    right: 30rpx;
+    font-size: 26rpx;
+    line-height: 46rpx;
+    border-radius: 10rpx;
+    animation: InOut 2s linear infinite;
+}
+
+/* 温度过低警告 */
+
+.t_warn_low::after {
+    content: '温度过低';
+    display: block;
+    width: 120rpx;
+    height: 46rpx;
+    background-color: rgb(62, 149, 219);
+    position: absolute;
+    top: -20rpx;
+    right: 30rpx;
+    font-size: 26rpx;
+    line-height: 46rpx;
+    border-radius: 10rpx;
+    animation: InOut 2s linear infinite;
+}
+
+/* 湿度过高警告 */
+
+.h_warn_top::before {
+    content: '湿度过高';
+    display: block;
+    width: 120rpx;
+    height: 46rpx;
+    background-color: rgb(241, 89, 68);
+    position: absolute;
+    top: -20rpx;
+    right: 30rpx;
+    font-size: 26rpx;
+    line-height: 46rpx;
+    border-radius: 10rpx;
+    animation: InOut 2s linear infinite;
+}
+
+/* 湿度过低警告 */
+
+.h_warn_low::before {
+    content: '湿度过低';
+    display: block;
+    width: 120rpx;
+    height: 46rpx;
+    background-color: rgb(62, 149, 219);
+    position: absolute;
+    top: -20rpx;
+    right: 30rpx;
+    font-size: 26rpx;
+    line-height: 46rpx;
+    border-radius: 10rpx;
+    animation: InOut 2s linear infinite;
+}
+
+/* 光照过高警告 */
+
+.l_warn_top::before {
+    content: '光照过高';
+    display: block;
+    width: 120rpx;
+    height: 46rpx;
+    background-color: rgb(241, 89, 68);
+    position: absolute;
+    top: -20rpx;
+    right: 30rpx;
+    font-size: 26rpx;
+    line-height: 46rpx;
+    border-radius: 10rpx;
+    animation: InOut 2s linear infinite;
+}
+
+/* 光照过低警告 */
+
+.l_warn_low::before {
+    content: '光照过低';
+    display: block;
+    width: 120rpx;
+    height: 46rpx;
+    background-color: rgb(62, 149, 219);
+    position: absolute;
+    top: -20rpx;
+    right: 30rpx;
+    font-size: 26rpx;
+    line-height: 46rpx;
+    border-radius: 10rpx;
+    animation: InOut 2s linear infinite;
+}
+
+/* 控制区域 */
+.control {
+    display: flex;
+}
+
+.iconfont {
+    font-size: 60rpx;
+    font-weight: 600;
+}
+
+.control view {
+    flex: 1;
+    padding: 22rpx;
+    font-size: 35rpx;
+    border: 1px solid #ccc;
+    margin: 5rpx;
+    position: relative;
+    text-align: center;
+    border-radius: 10rpx;
+}
+
+.ing::after {
+    content: '进行中';
+    display: block;
+    width: 100%;
+    height: 40rpx;
+    color: rgb(243, 121, 91);
+    font-size: 20rpx;
+    position: absolute;
+    animation: ing 2s infinite;
+}
+
+@keyframes InOut {
+    0%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes ing {
+    0% {
+        content: '进行中';
+    }
+    30% {
+        content: '进行中.';
+    }
+    60% {
+        content: '进行中..';
+    }
+    100% {
+        content: '进行中...';
+    }
+}

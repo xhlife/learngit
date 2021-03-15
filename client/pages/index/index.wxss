@@ -1,0 +1,425 @@
+/* pages/index/index.wxss */
+
+/* 最外层容器 */
+
+.moveArea {
+  height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.arch_box {
+  margin: 0 auto;
+}
+
+.arch_item {
+  width: 70vw;
+  height: 100rpx;
+  margin: 10rpx auto;
+  display: flex;
+  font-size: 40rpx;
+  text-align: center;
+  line-height: 100rpx;
+}
+
+.arch_item .arch_detail {
+  width: 60%;
+  background-color: #90d3ee;
+  margin: 0 auto;
+  border-radius: 20rpx;
+}
+
+.arch_item .status {
+  position: relative;
+}
+
+.arch_item .status_right::before {
+  content: "";
+  display: block;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: -50rpx;
+  transform: translateY(-50%);
+  background-color: rgb(7, 82, 15);
+}
+
+.arch_item .status_right::after {
+  content: "";
+  display: block;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: -50rpx;
+  transform: translateY(-50%);
+  background-color: rgb(7, 82, 15);
+  animation: wave 2s ease-out infinite;
+}
+
+/* 新增大棚 */
+
+.add_arch {
+  position: fixed;
+  bottom: 10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.add_arch button {
+  background-color: rgb(132, 216, 121);
+}
+
+/* 添加大棚的modal */
+
+.mask {
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .1);
+  border-radius: 5rpx;
+  z-index: 999;
+}
+
+.modal_content {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin-top: 10vh;
+}
+
+.modal_btn_wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100rpx;
+  line-height: 80rpx;
+  border-top: 2rpx solid rgba(7, 17, 27, 0.1);
+  padding-bottom: 40rpx;
+}
+
+.cancel_btn, .confirm_btn {
+  flex: 1;
+  height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+  border: 1px solid #ccc;
+  margin: 5rpx;
+  border-radius: 20rpx;
+}
+
+.cancel_btn {
+  border-right: 2rpx solid rgba(7, 17, 27, 0.1);
+}
+
+.main_content {
+  flex: 1;
+  font-size: 30rpx;
+}
+
+.input_id {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.input_id text {
+  flex: 2;
+  text-align: center;
+}
+
+.input_id input {
+  flex: 5;
+}
+
+.input_item {
+  display: flex;
+  padding-top: 20rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.input_item view {
+  flex: 1;
+  text-align: center;
+}
+
+.error {
+  border: 1px solid rgb(212, 114, 114);
+}
+
+/* 删除大棚的modal */
+
+.toast-box {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #fff;
+}
+
+.toastbg {
+  background-color: #fff;
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.showToast {
+  position: absolute;
+  opacity: 1;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 20%;
+}
+
+.toast-title {
+  padding-left: 5%;
+  background-color: #2196f3;
+  color: white;
+  text-align: center;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  border-top-right-radius: 16rpx;
+  border-top-left-radius: 16rpx;
+}
+
+.toast-main {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: white;
+  text-align: center;
+}
+
+.toast-input {
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #ddd;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.toast-button {
+  display: flex;
+}
+
+.button1 {
+  width: 50%;
+}
+
+.button2 {
+  width: 50%;
+}
+
+.button1 button {
+  width: 100%;
+  background-color: white;
+  color: red;
+  border-radius: 0px;
+  border-bottom-left-radius: 16rpx;
+}
+
+.button2 button {
+  width: 100%;
+  background-color: white;
+  color: black;
+  border-radius: 0px;
+  border-bottom-right-radius: 16rpx;
+}
+
+.picker {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.toast-box {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
+.toastbg {
+  opacity: 0.2;
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.showToast {
+  position: absolute;
+  opacity: 1;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 40%;
+}
+
+.toast-title {
+  padding-left: 5%;
+  background-color: #2196f3;
+  color: white;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  border-top-right-radius: 16rpx;
+  border-top-left-radius: 16rpx;
+}
+
+.toast-main {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: white;
+  text-align: center;
+}
+
+.toast-input {
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #ddd;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.toast-button {
+  display: flex;
+}
+
+.button1 {
+  width: 50%;
+}
+
+.button2 {
+  width: 50%;
+}
+
+.button1 button {
+  width: 100%;
+  background-color: white;
+  color: red;
+  border-radius: 0px;
+  border-bottom-left-radius: 16rpx;
+}
+
+.button2 button {
+  width: 100%;
+  background-color: white;
+  color: black;
+  border-radius: 0px;
+  border-bottom-right-radius: 16rpx;
+}
+
+.picker {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+/* 修改大棚信息模态框 */
+
+.changeBox {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+}
+
+.changeId{
+  width: 70%;
+  border: solid 1px #ccc;
+  display: block;
+  margin: 10rpx auto;
+  text-align: center;
+}
+/* 移动菜单 */
+
+.menu {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-radius: 50%;
+  text-align: center;
+  background-color: rgba(26, 43, 49, .7);
+  color: skyblue;
+  position: relative;
+  z-index: 999;
+}
+
+.menu view {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  font-size: 22rpx;
+  line-height: 90rpx;
+  position: absolute;
+  opacity: 0;
+}
+
+.menu .changeInfo {
+  top: -100rpx;
+  background-color: rgba(26, 43, 49, .7);
+  animation: fateIn .5s ease-out forwards;
+}
+
+.menu .deleteArch {
+  background-color: rgba(26, 43, 49, .7);
+  right: -80rpx;
+  top: -50rpx;
+  animation: fateIn .5s ease-out 0.2s forwards;
+}
+
+.menu .my {
+  background-color: rgba(26, 43, 49, .7);
+  top: 50rpx;
+  right: -90rpx;
+  animation: fateIn .5s ease-out .4s forwards;
+}
+
+/* 动画 */
+
+/* 监控动画 */
+
+@keyframes wave {
+  50%, 70% {
+    transform: translateY(-50%) scale(2.5);
+  }
+  80%, 100% {
+    opacity: 0;
+  }
+}
+
+/* 菜单动画 */
+
+@keyframes fateIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

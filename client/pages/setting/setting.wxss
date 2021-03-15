@@ -1,0 +1,21 @@
+/* pages/setting/setting.wxss */
+
+.setting_box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.username_set {
+    flex: 1;
+    height: 40rpx;
+    padding: 10rpx;
+    border-bottom: 1px solid #ccc;
+}
+
+.password_set {
+    flex: 1;
+    height: 40rpx;
+    padding: 10rpx;
+    border-bottom: 1px solid #ccc;
+}

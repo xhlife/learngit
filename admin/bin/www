@@ -1,0 +1,175 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('demo:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+// app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+ var server = http.createServer(app.callback());
+/*
+// 配置socket.io
+const socketPackage = require('socket.io')
+let io = socketPackage(server)
+// 建立连接
+io.on('connection', (socket) => {
+  console.log('连接成功');
+  socket.emit('msg', '欢迎')
+
+  socket.on('msg', (data) => {
+    console.log(data);
+  })
+}) */ 
+
+// ws模块的webSocket
+const WebSocket = require('ws')
+
+const wss = new WebSocket.Server({server})
+let user = {}  // 用于存储用户
+let online = 0;
+
+wss.on('connection', (ws,req) => {
+  console.log('someone in')
+  online = wss._server._connections
+  console.log(`当前在线人数${online}`);
+  
+  let i = req.url; // 提取网址参/concat?user:user
+  
+  let m = i.match(/(?<=\?)[^:]+?(?=:|$)/);    //提取我是谁,这部分代码只有第一次连接的时候运行,如果后面连接的m值相同,前面的连接会被覆盖身份
+  // console.log(m);
+  
+  if (m) {
+    user[m] = ws;  // 保存当前用户的socket
+  };
+  // console.dir(user[m]);
+  
+  let u = i.match(/(?<=:).+?$/);  // 发给谁
+  
+  ws.on('message', (message) => {
+    
+    console.log(`收到 ${i} 的消息 ${message}`)
+    // 检测url中是否指定发给谁。 如果没有指定，查看信息中是否有to(给谁)
+    let msg = JSON.parse(message)
+    if (u == 'undefined' || (u!=msg.to)) {
+      u = msg.to
+    }
+    if (u) {
+      if (user[u]) {
+        if (user[u].readyState === 1) {
+          user[u].send(message);
+          let data = {
+            code:'200',
+            msg:'发送成功'
+          }
+          ws.send(JSON.stringify(data));
+        } else {
+          ws.send(JSON.stringify({
+            code: -1,
+            msg: '对方掉线'
+          }));
+        }
+      } else {
+        ws.send(JSON.stringify({
+          code: -1,
+          msg: '对方不在线'
+        }));
+      }
+    } /* else {// 如果不指定发送用户，那么就广播消息
+      wss.clients.forEach(function each(client) {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(message+'hhh');
+        }
+      });
+    } */
+  })
+  // setTimeout(()=>{
+  //   ws.send('服务器信息')
+  //   // console.log(Array.from(wss.clients));
+  // },3000)
+}) 
+
+// const wss = new WebSocket('ws://localhost:3000/test')
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+

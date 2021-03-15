@@ -1,0 +1,168 @@
+<!-- pages/index/index.wxml -->
+<movable-area class="moveArea">
+  <!-- 大棚容器 -->
+  <view class="container">
+    <view class="arch_box">
+      <view class="arch_item" wx:for="{{archHouse}}" wx:key="id">
+        <view class="arch_detail" data-id="{{item.houseId}}" bindtap="showData">
+          {{item.houseId}} 号大棚-{{item.crops}}
+        </view>
+        <view class="status status_right">监控正常</view>
+      </view>
+    </view>
+    <view class="add_arch">
+      <button bindtap="addArch">新增大棚</button>
+    </view>
+    <!-- 添加大棚模态框 -->
+    <view class="mask" wx:if="{{show}}">
+      <view class="modal_content">
+        <scroll-view scroll-y class="main_content">
+          <view>
+            <view class="input_id">
+              <text>棚号:</text>
+              <input data-name="houseId" bindinput="inputBlur" type="text" placeholder="请输入终端型号作为棚号" value="{{houseId}}"></input>
+            </view>
+            <view class="input_id">
+              <text>作物:</text>
+              <input data-name="crops" bindinput="inputBlur" type="text" placeholder="请输入种植作物" value="{{crops}}"></input>
+            </view>
+            <!-- 温度 -->
+            <view class="input_item">
+              <view>
+                <text>最高温</text>
+                <input data-name="temperatureT" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{temperatureT}}"></input>
+              </view>
+              <view>
+                <text>最低温</text>
+                <input data-name="temperatureL" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{temperatureL}}"></input>
+              </view>
+              <view>
+                <text>最适温</text>
+                <input data-name="temperatureS" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{temperatureS}}"></input>
+              </view>
+            </view>
+            <!-- 湿度 -->
+            <view class="input_item">
+              <view>
+                <text>最高湿度</text>
+                <input data-name="humidityT" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{humidityT}}"></input>
+              </view>
+              <view>
+                <text>最低湿度</text>
+                <input data-name="humidityL" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{humidityL}}"></input>
+              </view>
+              <view>
+                <text>最适湿度</text>
+                <input data-name="humidityS" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{humidityS}}"></input>
+              </view>
+            </view>
+            <!-- 光照度 -->
+            <view class="input_item">
+              <view>
+                <text>最高亮度</text>
+                <input data-name="lightT" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{lightT}}"></input>
+              </view>
+              <view>
+                <text>最低亮度</text>
+                <input data-name="lightL" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{lightL}}"></input>
+              </view>
+              <view>
+                <text>最适亮度</text>
+                <input data-name="lightS" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{lightS}}"></input>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+        <view class="modal_btn_wrapper">
+          <view class="cancel_btn" bindtap="cancelAdd">取消</view>
+          <view class="confirm_btn" bindtap="confirmAdd">确认</view>
+        </view>
+      </view>
+    </view>
+    <!-- 删除大棚模态框 -->
+    <view class='toast-box' wx:if="{{deleteShow}}">
+      <view class='toastbg'></view>
+      <view class='showToast'>
+        <view class='toast-title'>
+          <text>删除大棚</text>
+        </view>
+        <view class='toast-main'>
+          <view class='toast-input'>
+            <input placeholder='请输入大棚号' bindinput='deleteInput' data-name='houseId'></input>
+          </view>
+        </view>
+        <view class='toast-button'>
+          <view class='button1'>
+            <button catchtap='deleteCancel'>取消</button>
+          </view>
+          <view class='button2'>
+            <button catchtap='deleteConfirm'>确定</button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 修改大棚信息模态框 -->
+    <view class='changeBox' wx:if="{{changeShow}}">
+      <view class="changeId">
+        <input type="text" bindinput="changeIdInput" placeholder="请输入需要修改的大棚号"></input>
+      </view>
+      <view class="infoMask">
+        <view style="text-align: center;">{{changeHouseId}}号大棚信息 - 作物：{{crops}}</view>
+        <view class="input_item">
+          <view>
+            <text>最高温</text>
+            <input data-name="temperatureT" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{temperatureT}}"></input>
+          </view>
+          <view>
+            <text>最低温</text>
+            <input data-name="temperatureL" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{temperatureL}}"></input>
+          </view>
+          <view>
+            <text>最适温</text>
+            <input data-name="temperatureS" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{temperatureS}}"></input>
+          </view>
+        </view>
+        <!-- 湿度 -->
+        <view class="input_item">
+          <view>
+            <text>最高湿度</text>
+            <input data-name="humidityT" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{humidityT}}"></input>
+          </view>
+          <view>
+            <text>最低湿度</text>
+            <input data-name="humidityL" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{humidityL}}"></input>
+          </view>
+          <view>
+            <text>最适湿度</text>
+            <input data-name="humidityS" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{humidityS}}"></input>
+          </view>
+        </view>
+        <!-- 光照度 -->
+        <view class="input_item">
+          <view>
+            <text>最高亮度</text>
+            <input data-name="lightT" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{lightT}}"></input>
+          </view>
+          <view>
+            <text>最低亮度</text>
+            <input data-name="lightL" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{lightL}}"></input>
+          </view>
+          <view>
+            <text>最适亮度</text>
+            <input data-name="lightS" bindinput="inputBlur" type="text" placeholder="输入数字" value="{{lightS}}"></input>
+          </view>
+        </view>
+      </view>
+      <view class="modal_btn_wrapper">
+        <view class="cancel_btn" bindtap="changeCancel">取消</view>
+        <view class="confirm_btn" bindtap="changeConfirm">确认</view>
+      </view>
+    </view>
+  </view>
+  <!-- 移动菜单栏 -->
+  <movable-view class="menu iconfont icon-menu" x="0" y="100" damping="30" direction="all" inertia bindtap="menuClick">
+    <view wx:if="{{menuShow}}" class="changeInfo" bindtap="changeInfo">修改</view>
+    <view wx:if="{{menuShow}}" class="deleteArch" bindtap="deleteArch">删除</view>
+    <view wx:if="{{menuShow}}" bindtap="myCenter" class="my">个人中心</view>
+  </movable-view>
+</movable-area>

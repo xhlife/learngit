@@ -1,0 +1,104 @@
+<!-- pages/showData/showData.wxml -->
+<view class="container">
+  <view class="headtext">{{currentHouse[0].houseId}} 号大棚--种植作物:{{currentHouse[0].crops}}</view>
+  <!-- 数据监控模块 -->
+  <view class="temperature">
+    <!-- 温度文本 -->
+    <view class="textarea">
+      <view class="text">
+        <text class="iconfont icon-wendu"></text>
+        温度监控
+      </view>
+      <view class="text">
+        最适温度--
+        <text class="suitable">{{currentHouse[0].temperature.suitable}}°C</text>
+      </view>
+      <view class="text {{realTimeData.temperature.temperatureData[realTimeData.temperature.temperatureData.length-1] > currentHouse[0].temperature.top ? 't_warn_top':''}} {{realTimeData.temperature.temperatureData[realTimeData.temperature.temperatureData.length-1] < currentHouse[0].tempelature.low ? 't_warn_low':''}}">
+        当前温度:{{realTimeData.temperature.temperatureData[realTimeData.temperature.temperatureData.length-1]}}°C
+      </view>
+    </view>
+    <!-- 湿度文本 -->
+    <view class="textarea">
+      <view class="text">
+        <text class="iconfont icon-shidu"></text>
+        湿度监控
+      </view>
+      <view class="text">
+        最适湿度--
+        <text class="suitable">{{currentHouse[0].humidity.suitable}}%rh</text>
+      </view>
+      <view class="text {{realTimeData.humidity.humidityData[realTimeData.humidity.humidityData.length-1] > currentHouse[0].humidity.top ? 'h_warn_top':''}} {{realTimeData.humidity.humidityData[realTimeData.humidity.humidityData.length-1] < currentHouse[0].humidity.low ? 'h_warn_low':''}}">
+        当前湿度:{{realTimeData.humidity.humidityData[realTimeData.humidity.humidityData.length-1]}}%rh
+      </view>
+    </view>
+    <!-- 光照强度文本 -->
+    <view class="textarea">
+      <view class="text">
+        <text class="iconfont icon-guangzhao"></text>
+        光照监控
+      </view>
+      <view class="text">
+        最适光照--
+        <text class="suitable">{{currentHouse[0].light.suitable}}lx</text>
+      </view>
+      <view class="text  {{realTimeData.light.lightData[realTimeData.light.lightData.length-1] > currentHouse[0].light.top ? 'l_warn_top':''}} {{realTimeData.light.lightData[realTimeData.light.lightData.length-1] < currentHouse[0].light.low ? 'l_warn_low':''}}">
+        当前光照:{{realTimeData.light.lightData[realTimeData.light.lightData.length-1]}}lx
+      </view>
+    </view>
+    <canvas class="canvas" canvas-id="dataChart"></canvas>
+  </view>
+  <!-- 控制区域 -->
+  <view class="control">
+    <!-- 温度控制 -->
+    <!-- 升温/ 停止 -->
+    <view class="temperatureUp iconfont icon-jiare {{controlStatus.temperatureUp.ing ? 'ing': ''}}" bindtap="temperatureUp">
+      {{controlStatus.temperatureUp.controlName}}
+    </view>
+    <!-- 降温/停止 -->
+    <view class="temperatureDown iconfont icon-fengshan {{controlStatus.temperatureDown.ing ? 'ing': ''}}" bindtap="temperatureDown">
+      {{  controlStatus.temperatureDown.controlName}}
+    </view>
+    <!-- 浇水/停止 -->
+    <view class="watering iconfont icon-jiaoshui {{controlStatus.watering.ing ? 'ing': ''}}" bindtap="watering">
+      {{controlStatus.watering.controlName}}
+    </view>
+  </view>
+  <view class="control">
+    <!-- 施肥/停止 -->
+    <view class="fertilize iconfont icon-shifei {{controlStatus.fertilize.ing ? 'ing': ''}}" bindtap="fertilize">
+      {{controlStatus.fertilize.controlName}}
+    </view>
+    <!-- 开灯/关灯 -->
+    <view class="on iconfont icon-diandeng" bindtap="lightOn">
+      {{controlStatus.lightOn.ing ? controlStatus.lightOn.stop: controlStatus.lightOn.controlName}}
+    </view>
+  </view>
+  <!-- 湿度监控模块 -->
+  <!-- <view class="">
+    <view class="textarea">
+      <view class="text">
+        <text class="iconfont icon-shidu"></text>
+        湿度监控
+      </view>
+      <view class="text">最适湿度--{{currentHouse[0].humidity.suitable}}%rh</view>
+      <view class="text">
+        当前湿度:{{realTimeData.humidity.humidityData[realTimeData.humidity.humidityData.length-1]}}%rh
+      </view>
+    </view>
+    <canvas class="canvas" canvas-id="humidity"></canvas>
+  </view> -->
+  <!-- 光照监控模块 -->
+  <!-- <view class="light">
+    <view class="textarea">
+      <view class="text">
+        <text class="iconfont icon-guangzhao"></text>
+        光照监控
+      </view>
+      <view class="text">最适湿度--{{currentHouse[0].light.suitable}}lx</view>
+      <view class="text">
+        当前光照:{{realTimeData.temperatureData[realTimeData.temperatureData.length-1]}}度
+      </view>
+    </view>
+    <canvas class="canvas" canvas-id="light"></canvas>
+  </view> -->
+</view>

@@ -1,0 +1,15 @@
+/* 头部标题 */
+
+.head_title {
+    text-align: center;
+}
+
+/* 外壳 */
+/* #outer-arch{
+
+} */
+
+/* 具体实现 */
+#inner-arch{
+    display: none; 
+}
