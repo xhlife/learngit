@@ -27,3 +27,6 @@ globalData: {
     wsUrl: "ws://192.168.56.1:3000"
     }
 ```
+
+### 线上答辩视频演示
+https://www.bilibili.com/video/BV1j5411W76z?t=27
